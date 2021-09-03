@@ -1,0 +1,76 @@
+---
+title: "As total starts increases, the total number of fails increases"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+pacman::p_load(tidyverse,plotly,reactable,crosstalk,htmltools)
+players <- read.csv("Player_Prog.csv")
+```
+
+
+```{r, echo=FALSE}
+
+small_df <- players
+
+small_df <- small_df %>% mutate_if(is.character, as.factor)
+
+pen_df <- SharedData$new(small_df)
+
+x <- list(title="Total Starts", range= c(0,15000))
+y <- list(title="Ttoal Fails", range=c(0,15000))
+
+plotly_graphic <- plot_ly(pen_df,
+                          x = ~total_start,
+                          y = ~total_fail,
+                          text = ~Checkpoint) %>% 
+  add_markers() %>% 
+  layout(
+    xaxis=~x,
+    yaxis=~y
+    ) %>% 
+  highlight(
+    on = "plotly_selected",
+    off = "plotly_doubleclick",
+    persistent = FALSE
+      ) %>% 
+  config(displaylogo=FALSE)
+
+reactable_table <-  reactable(
+  pen_df,
+  columns = list(
+    Checkpoint = colDef("Checkpoint"),
+    usercount = colDef("User count"),
+    total_start = colDef("Total Starts"),
+    total_pass = colDef("Total Passes"),
+    total_fail = colDef("Total Fails"),
+    total_quit = colDef("Total Quits"),
+    unique_user_pass = colDef("Unique User Passes"),
+    unique_user_fail = colDef("Unique User Fails"),
+    unique_user_quit = colDef("Unique User Quits"),
+    avg_checkpoint_duration..sec. = colDef("AverageDuration (secs.)"),
+    avg_cumulative_playtime..sec. = colDef("Cumulative Playtime secs."))
+    )
+
+```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+div(
+  h3("Filter by: Checkpoint or Total Fails"),
+  br(),
+  bscols(
+    widths = c(2, 10),
+    list(
+      filter_slider("total_fail", "Total Fails", pen_df, ~total_fail),
+      filter_checkbox("Checkpoint", "Checkpoint", pen_df, ~Checkpoint)
+    ),
+    plotly_graphic,
+  br(),
+  reactable_table
+  )
+)  
+```
+
+> A game in development has just been tested on 1000 users but only a few are getting to checkpoint 30. Users can only progress to the next checkpoint when the previous has been passed. Users can re-play any passed checkpoint. This widget explores the relationship between total starts and total fails. 
+

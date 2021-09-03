@@ -1,9 +1,9 @@
 {
     "id": "A8AC8154",
-    "path": "~/Documents/R/Demos/Square_Cross/Square_Crosstalk.Rmd",
-    "project_path": "Square_Crosstalk.Rmd",
+    "path": "~/Documents/R/Demos/Square_Cross/index.Rmd",
+    "project_path": "index.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "1422747422",
     "contents": "",
     "dirty": false,
     "created": 1630701725071.0,
@@ -11,14 +11,16 @@
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "21,28",
+        "scrollLine": "11"
     },
     "folds": "",
-    "lastKnownWriteTime": 1630701541,
+    "lastKnownWriteTime": 1630702035,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1630701541,
+    "last_content_update": 1630702035384,
     "read_only": false,
     "read_only_alternatives": []
 }

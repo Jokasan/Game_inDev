@@ -1,5 +1,5 @@
 ---
-title: "As total starts increases average cumulative play time increases"
+title: "As total starts increases, the total number of fails increases"
 output: html_document
 ---
 
@@ -19,7 +19,7 @@ small_df <- small_df %>% mutate_if(is.character, as.factor)
 pen_df <- SharedData$new(small_df)
 
 x <- list(title="Total Starts", range= c(0,15000))
-y <- list(title="Average Cumulative Playtime (secs.)", range=c(0,15000))
+y <- list(title="Ttoal Fails", range=c(0,15000))
 
 plotly_graphic <- plot_ly(pen_df,
                           x = ~total_start,
@@ -57,7 +57,7 @@ reactable_table <-  reactable(
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 div(
-  h3("Filter by: checkpoint or averagge cumulative play time"),
+  h3("Filter by: Checkpoint or Total Fails"),
   br(),
   bscols(
     widths = c(2, 10),
@@ -72,5 +72,5 @@ div(
 )  
 ```
 
-> A game in development has just been tested on 1000 users but only a few are getting to checkpoint 30. You have been provided with a summary of user data broken down by game checkpoint. Users can only progress to the next checkpoint when the previous has been passed. Users can re-play any passed checkpoint. This widget explores the relationship between total starts and average cummulative playtime. 
+> A game in development has just been tested on 1000 users but only a few are getting to checkpoint 30. Users can only progress to the next checkpoint when the previous has been passed. Users can re-play any passed checkpoint. This widget explores the relationship between total starts and total fails. 
 
