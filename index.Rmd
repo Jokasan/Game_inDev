@@ -19,7 +19,7 @@ small_df <- small_df %>% mutate_if(is.character, as.factor)
 pen_df <- SharedData$new(small_df)
 
 x <- list(title="Total Starts", range= c(0,15000))
-y <- list(title="Ttoal Fails", range=c(0,15000))
+y <- list(title="Total Fails", range=c(0,15000))
 
 plotly_graphic <- plot_ly(pen_df,
                           x = ~total_start,
